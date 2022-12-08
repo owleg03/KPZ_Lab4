@@ -64,14 +64,14 @@ public class BrandsController : ControllerBase
 
     // POST: api/Brands
     [HttpPost]
-    public async Task<IActionResult> PostBrand(BrandDto brandDto)
+    public async Task<Brand> PostBrand([FromBody]BrandDto brandDto)
     {
         var brand = _mapper.Map<BrandDto, Brand>(brandDto);
         
         _context.Brands.Add(brand);
         await _context.SaveChangesAsync();
 
-        return Ok($"Brand {brand.Name} was added successfully");
+        return brand;
     }
 
     // DELETE: api/Brands/5
